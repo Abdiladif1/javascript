@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Events Examples</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .event-box { border: 1px solid #ccc; padding: 10px; margin: 10px 0; }
+  </style>
+</head>
+<body>
+
+  <h1>JavaScript Events Examples</h1>
+
+  <div class="event-box">
+    <button onclick="handleClick()">Click Me (onclick)</button>
+  </div>
+
+  <div class="event-box">
+    <input type="text" onchange="handleChange(this)">
+    <p id="changeOutput"></p>
+  </div>
+
+  <div class="event-box">
+    <input type="text" oninput="handleInput(this)" placeholder="Type here...">
+    <p id="inputOutput"></p>
+  </div>
+
+  <div class="event-box">
+    <select onchange="handleSelect(this)">
+      <option value="">--Select--</option>
+      <option value="Option 1">Option 1</option>
+      <option value="Option 2">Option 2</option>
+    </select>
+    <p id="selectOutput"></p>
+  </div>
+
+  <div class="event-box">
+    <button onmouseover="handleMouseOver(this)" onmouseout="handleMouseOut(this)">Hover over me</button>
+  </div>
+
+  <div class="event-box">
+    <input type="text" onfocus="handleFocus(this)" onblur="handleBlur(this)" placeholder="Focus & blur">
+  </div>
+
+  <div class="event-box">
+    <input type="text" onkeydown="handleKeyDown(event)" placeholder="Type something...">
+    <p id="keyOutput"></p>
+  </div>
+
+  <div class="event-box">
+    <form onsubmit="return handleSubmit(event)">
+      <input type="text" placeholder="Form input">
+      <button type="submit">Submit (onsubmit)</button>
+    </form>
+    <p id="formOutput"></p>
+  </div>
+
+  <script>
+    function handleClick() {
+      alert("Button clicked!");
+    }
+
+    function handleChange(input) {
+      document.getElementById("changeOutput").textContent = "Changed to: " + input.value;
+    }
+
+    function handleInput(input) {
+      document.getElementById("inputOutput").textContent = "Current: " + input.value;
+    }
+
+    function handleSelect(select) {
+      document.getElementById("selectOutput").textContent = "Selected: " + select.value;
+    }
+
+    function handleMouseOver(el) {
+      el.style.backgroundColor = "yellow";
+      el.textContent = "Mouse Over";
+    }
+
+    function handleMouseOut(el) {
+      el.style.backgroundColor = "";
+      el.textContent = "Hover over me";
+    }
+
+    function handleFocus(input) {
+      input.style.borderColor = "green";
+    }
+
+    function handleBlur(input) {
+      input.style.borderColor = "";
+    }
+
+    function handleKeyDown(event) {
+      document.getElementById("keyOutput").textContent = `Key Pressed: ${event.key}`;
+    }
+
+    function handleSubmit(event) {
+      event.preventDefault();
+      document.getElementById("formOutput").textContent = "Form submitted!";
+      return false;
+    }
+  </script>
+
+</body>
+</html>

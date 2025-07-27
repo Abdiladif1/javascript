@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Traffic Light Simulation</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #222;
+    }
+
+    .traffic-light {
+      width: 120px;
+      padding: 20px;
+      background: #111;
+      border-radius: 20px;
+      box-shadow: inset 0 0 15px #000, 0 0 30px #000;
+    }
+
+    .bulb {
+      width: 80px;
+      height: 80px;
+      margin: 15px auto;
+      border-radius: 50%;
+      background: #2b2b2b;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    .red.on {
+      background: red;
+      box-shadow: 0 0 20px 8px red;
+    }
+
+    .amber.on {
+      background: orange;
+      box-shadow: 0 0 20px 8px orange;
+    }
+
+    .green.on {
+      background: limegreen;
+      box-shadow: 0 0 20px 8px limegreen;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="traffic-light">
+    <div class="bulb red"></div>
+    <div class="bulb amber"></div>
+    <div class="bulb green"></div>
+  </div>
+
+  <script>
+    const red = document.querySelector('.red');
+    const amber = document.querySelector('.amber');
+    const green = document.querySelector('.green');
+
+    // Define the state machine sequence
+    const states = [
+      { lights: ['red'], duration: 3000 },
+      { lights: ['red', 'amber'], duration: 1000 },
+      { lights: ['green'], duration: 3000 },
+      { lights: ['amber'], duration: 1000 }
+    ];
+
+    let currentState = 0;
+
+    function updateLights() {
+      // Turn all lights off
+      [red, amber, green].forEach(light => light.classList.remove('on'));
+
+      // Turn on the current state lights
+      states[currentState].lights.forEach(color => {
+        document.querySelector('.' + color).classList.add('on');
+      });
+
+      // Move to the next state
+      currentState = (currentState + 1) % states.length;
+
+      // Call again after current state's duration
+      setTimeout(updateLights, states[currentState].duration);
+    }
+
+    // Start the cycle
+    updateLights();
+  </script>
+
+</body>
+</html>
